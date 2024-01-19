@@ -1,86 +1,40 @@
-import Image from 'next/image'
 import styles from './page.module.css'
 
 export default function Home() {
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    console.log('Selected file:', file);
+
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      const imagePlaceholder = document.getElementById('image-placeholder');
+      imagePlaceholder.innerHTML = `<img src="${imageUrl}" alt="Uploaded image"/>`;
+    } 
+
+    const outputEl = document.getElementById('output');
+    
+    outputEl.innerText = 'thinking 🤔'
+
+
+
+
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
+    <div style={{ display: 'flex', flexDirection: 'column'}}>
+      <div style={{ padding: '30px', margin: '30px', }} >
+        <h1 className="mt-12 text-center px-30">Image Recognizer 🤖</h1>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <span>+</span>
-        <Image
-          src="/amplify.svg"
-          alt="Amplify Logo"
-          width={45}
-          height={37}
-          priority
-        />
-      </div>
+      <label className="bg-blue-500 text-white px-4 py-2 cursor-pointer w-18 ">
+        Upload a file
+        <input type="file" onChange={handleFileUpload} className="hidden" />
+      </label>
 
-      <div className={styles.grid}>
-        <a
-          href="https://docs.amplify.aws/gen2/"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Review documentation for Amplify's code-first DX (Gen 2).</p>
-        </a>
+      <div id="output" className='text-lg font-bold pt-4'> </div>
 
-        <a
-          href="https://docs.amplify.aws/gen2/start/quickstart/"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Quickstart <span>-&gt;</span>
-          </h2>
-          <p>Follow a tutorial to build a fullstack app with Amplify Gen 2.</p>
-        </a>
+      <div id="image-placeholder" style={{ width: '600px', height: '600px', margin: '20px'}}></div>
 
-        <a
-          href="https://docs.amplify.aws/gen2/build-a-backend/auth/set-up-auth/"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Auth <span>-&gt;</span>
-          </h2>
-          <p>Zero-config Auth UI components with social sign-in and MFA.</p>
-        </a>
-
-        <a
-          href="https://docs.amplify.aws/gen2/build-a-backend/data/set-up-data/"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Data <span>-&gt;</span>
-          </h2>
-          <p>
-            Fully-typed real-time API with NoSQL database.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   )
 }
