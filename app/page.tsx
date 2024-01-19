@@ -1,7 +1,7 @@
 import styles from './page.module.css'
 
 export default function Home() {
-  const handleFileUpload = (event) => {
+  const handleFileUpload = (event: any) => {
     const file = event.target.files[0];
     console.log('Selected file:', file);
 
